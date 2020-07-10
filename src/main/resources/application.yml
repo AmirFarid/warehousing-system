@@ -2,6 +2,8 @@ debug: false
 
 server:
   port: 9000
+  servlet:
+    context-path: /api
 
 spring:
   application:
@@ -18,17 +20,17 @@ spring:
     password: 123456789
 
   jpa:
-    hibernate:
-      ddl-auto: validate
-      dialect: org.hibernate.dialect.PostgreSQLDialect
-      default_schema: capsule
+    properties:
+      hibernate:
+        ddl-auto: validate
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        default_schema: capsule
     show-sql: false
     database: postgresql
     generate-ddl: true
 
 
+
 logging:
-  level:
-    org:
-      springframework:
-        web=INFO:
+  pattern:
+    level: INFO
