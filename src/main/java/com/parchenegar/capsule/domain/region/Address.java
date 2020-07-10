@@ -1,6 +1,7 @@
-package com.parchenegar.capsule.domain;
+package com.parchenegar.capsule.domain.region;
 
 
+import com.parchenegar.capsule.domain.user.User;
 import lombok.*;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,6 +28,10 @@ public class Address
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "REGION_ID")
-    private Region region;
+    Region region;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "USER_ID")
+    User user;
 
 }

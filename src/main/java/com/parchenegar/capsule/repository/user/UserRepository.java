@@ -1,6 +1,6 @@
 package com.parchenegar.capsule.repository;
 
-import com.parchenegar.capsule.domain.User;
+import com.parchenegar.capsule.domain.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

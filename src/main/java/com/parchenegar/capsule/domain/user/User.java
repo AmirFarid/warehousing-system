@@ -1,5 +1,6 @@
-package com.parchenegar.capsule.domain;
+package com.parchenegar.capsule.domain.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -14,11 +15,15 @@ import java.util.Date;
 @AllArgsConstructor
 public class User
 {
+    private static final long serialVersionUID = -2343243243242432341L;
+
     @Id
     long id;
     String firstName;
     String lastName;
-    String mobile;
+    String username;
+    @JsonIgnore
+    String password;
     Date created;
     Date modified;
 }

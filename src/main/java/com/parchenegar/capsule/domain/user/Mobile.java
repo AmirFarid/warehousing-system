@@ -1,4 +1,4 @@
-package com.parchenegar.capsule.domain;
+package com.parchenegar.capsule.domain.user;
 
 
 import lombok.*;
