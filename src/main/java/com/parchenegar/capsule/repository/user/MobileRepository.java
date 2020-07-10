@@ -1,4 +1,4 @@
-package com.parchenegar.capsule.repository;
+package com.parchenegar.capsule.repository.user;
 
 import com.parchenegar.capsule.domain.user.Mobile;
 import org.springframework.data.jpa.repository.JpaRepository;
