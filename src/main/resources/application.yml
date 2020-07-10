@@ -1,0 +1,19 @@
+debug: true
+
+---
+
+spring:
+
+  application:
+    name: Capsule
+
+  main:
+    log-startup-info: false
+    banner-mode: off
+
+
+
+---
+
+server:
+  port: 9000
