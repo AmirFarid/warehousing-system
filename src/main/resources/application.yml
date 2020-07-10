@@ -6,6 +6,9 @@ server:
     context-path: /api
 
 spring:
+  messages:
+    fallback-to-system-locale: false
+    basename: messages,config.i18n.messages
   application:
     name: Capsule
   main:
