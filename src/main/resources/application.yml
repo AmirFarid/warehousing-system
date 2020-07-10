@@ -1,19 +1,34 @@
-debug: true
-
----
-
-spring:
-
-  application:
-    name: Capsule
-
-  main:
-    log-startup-info: false
-    banner-mode: off
-
-
-
----
+debug: false
 
 server:
   port: 9000
+
+spring:
+  application:
+    name: Capsule
+  main:
+    log-startup-info: false
+    banner-mode: off
+  profiles:
+    active: dev
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/parchenegar
+    username: nima
+    password: 123456789
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+      default_schema: capsule
+    show-sql: false
+    database: postgresql
+    generate-ddl: true
+
+
+logging:
+  level:
+    org:
+      springframework:
+        web=INFO:
