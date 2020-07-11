@@ -15,8 +15,6 @@ import java.util.Date;
 @AllArgsConstructor
 public class User
 {
-    private static final long serialVersionUID = -2343243243242432341L;
-
     @Id
     long id;
     String firstName;
