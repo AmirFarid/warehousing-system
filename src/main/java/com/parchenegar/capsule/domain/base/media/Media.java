@@ -4,11 +4,12 @@ import com.parchenegar.capsule.domain.product.Product;
 import lombok.*;
 import org.hibernate.annotations.Any;
 import org.hibernate.annotations.AnyMetaDef;
+import org.hibernate.annotations.ManyToAny;
 import org.hibernate.annotations.MetaValue;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Table(name = "MEDIA")
 @Entity
@@ -17,9 +18,12 @@ import java.util.Date;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@AnyMetaDef(name = "entityMetaDef", metaType = "string", idType = "long", metaValues = {
-        @MetaValue(targetEntity = Product.class, value = "product")
-})
+@DiscriminatorColumn(name = "ENTITY", discriminatorType = DiscriminatorType.STRING)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+//@AnyMetaDef(name = "EntityMetaDef", metaType = "string", idType = "long", metaValues = {
+//        @MetaValue(targetEntity = Product.class, value = "product"),
+//        @MetaValue(targetEntity = Category.class, value = "category")
+//})
 public class Media
 {
     @Id
@@ -32,8 +36,4 @@ public class Media
     String path;
     Date created;
     Date modified;
-
-    @Any(metaColumn = @Column(name = "entity"), metaDef = "entityMetaDef", fetch = FetchType.LAZY)
-    @JoinColumn(name = "ENTITY_ID")
-    Object entity;
 }
