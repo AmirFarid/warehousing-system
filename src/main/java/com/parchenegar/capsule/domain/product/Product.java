@@ -1,14 +1,16 @@
 package com.parchenegar.capsule.domain.product;
 
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.parchenegar.capsule.domain.base.Category;
-import com.parchenegar.capsule.domain.base.Media;
+import com.parchenegar.capsule.domain.base.media.ProductMedia;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 @Table(name = "PRODUCTS")
 @Entity
@@ -17,7 +19,8 @@ import java.util.Set;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class Product
+@JsonIdentityInfo(property = "id", generator = ObjectIdGenerators.PropertyGenerator.class)
+public class Product implements  Serializable
 {
     @Id
     long id;
@@ -34,8 +37,9 @@ public class Product
     @JoinColumn(name = "PRODUCT_TYPE_ID")
     ProductType type;
 
-    @OneToMany(mappedBy = "entity", fetch = FetchType.LAZY)
-    List<Media> media;
+    @OneToMany(fetch = FetchType.EAGER)
+    @ToString.Exclude
+    List<ProductMedia> media;
 
     @ManyToMany
     @JoinTable(
@@ -43,7 +47,8 @@ public class Product
             joinColumns = @JoinColumn(name = "PRODUCT_ID"),
             inverseJoinColumns = @JoinColumn(name = "CATEGORY_ID")
     )
-    Set<Category> categories;
+    @ToString.Exclude
+    List<Category> categories;
 
 
     public boolean isActive()
@@ -54,14 +59,15 @@ public class Product
         return false;
     }
 
-    public Product setIsActive(boolean status)
+    public Product changeToActive()
     {
-        if (status) {
-            this.isActive = "true";
-        } else {
-            this.isActive = "false";
-        }
+        this.isActive = "true";
+        return this;
+    }
 
+    public Product changeToDeActive()
+    {
+        this.isActive = "false";
         return this;
     }
 }

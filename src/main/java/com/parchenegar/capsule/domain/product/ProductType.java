@@ -22,7 +22,4 @@ public class ProductType
     String description;
     Date created;
     Date modified;
-
-    @OneToMany(mappedBy = "type")
-    List<Product> products;
 }

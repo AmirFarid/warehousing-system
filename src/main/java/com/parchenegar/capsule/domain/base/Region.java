@@ -1,10 +1,9 @@
-package com.parchenegar.capsule.domain.region;
+package com.parchenegar.capsule.domain.base;
 
 
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.List;
 
 @Table(name = "REGIONS")

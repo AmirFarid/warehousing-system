@@ -1,4 +1,4 @@
-package com.parchenegar.capsule.domain.region;
+package com.parchenegar.capsule.domain.base;
 
 import lombok.*;
 import org.springframework.transaction.annotation.Transactional;

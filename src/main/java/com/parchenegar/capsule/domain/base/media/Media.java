@@ -1,15 +1,9 @@
-package com.parchenegar.capsule.domain.base;
+package com.parchenegar.capsule.domain.base.media;
 
-import com.parchenegar.capsule.domain.product.Product;
 import lombok.*;
-import org.hibernate.annotations.Any;
-import org.hibernate.annotations.AnyMetaDef;
-import org.hibernate.annotations.ManyToAny;
-import org.hibernate.annotations.MetaValue;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Table(name = "MEDIA")
 @Entity
@@ -20,10 +14,6 @@ import java.util.List;
 @AllArgsConstructor
 @DiscriminatorColumn(name = "ENTITY", discriminatorType = DiscriminatorType.STRING)
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-//@AnyMetaDef(name = "EntityMetaDef", metaType = "string", idType = "long", metaValues = {
-//        @MetaValue(targetEntity = Product.class, value = "product"),
-//        @MetaValue(targetEntity = Category.class, value = "category")
-//})
 public class Media
 {
     @Id
