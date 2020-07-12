@@ -1,6 +1,6 @@
 package com.parchenegar.capsule.repository.region;
 
-import com.parchenegar.capsule.domain.region.Address;
+import com.parchenegar.capsule.domain.base.Address;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
