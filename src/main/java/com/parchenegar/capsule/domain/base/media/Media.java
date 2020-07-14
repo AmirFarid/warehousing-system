@@ -5,16 +5,15 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Date;
 
-@Table(name = "MEDIA")
-@Entity
 @Data
+@Entity
 @Builder
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@DiscriminatorColumn(name = "ENTITY", discriminatorType = DiscriminatorType.STRING)
+@Table(name = "MEDIA")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public class Media
+@DiscriminatorColumn(name = "ENTITY", discriminatorType = DiscriminatorType.STRING)
+public abstract class Media
 {
     @Id
     long id;

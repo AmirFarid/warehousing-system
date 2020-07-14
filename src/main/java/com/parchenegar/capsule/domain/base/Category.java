@@ -11,13 +11,12 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-@Table(name = "CATEGORIES")
-@Entity
 @Data
+@Entity
 @Builder
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "CATEGORIES")
 @JsonIdentityInfo(property = "id", generator = ObjectIdGenerators.PropertyGenerator.class)
 public class Category implements Serializable
 {

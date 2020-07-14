@@ -6,13 +6,12 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.List;
 
-@Table(name = "REGIONS")
-@Entity
 @Data
+@Entity
 @Builder
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "REGIONS")
 public class Region
 {
     @Id

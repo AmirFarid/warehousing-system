@@ -5,15 +5,14 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
-@Table(name = "PRODUCT_TYPES")
-@Entity
 @Data
+@Entity
 @Builder
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "PRODUCT_TYPES")
 public class ProductType
 {
     @Id

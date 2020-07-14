@@ -8,14 +8,12 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.*;
 import java.util.Date;
 
-@Table(name = "ADDRESSES")
-@Entity
 @Data
+@Entity
 @Builder
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Transactional
+@Table(name = "ADDRESSES")
 public class Address
 {
     @Id

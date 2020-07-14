@@ -2,19 +2,16 @@ package com.parchenegar.capsule.domain.user;
 
 
 import lombok.*;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.util.Date;
 
-@Table(name = "MOBILES")
-@Entity
 @Data
+@Entity
 @Builder
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Transactional
+@Table(name = "MOBILES")
 public class Mobile
 {
     @Id

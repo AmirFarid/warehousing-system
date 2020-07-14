@@ -9,12 +9,15 @@ import javax.persistence.*;
 
 @Data
 @Entity
+@Builder
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 @DiscriminatorValue("category")
 @JsonIdentityInfo(property = "id", generator = ObjectIdGenerators.PropertyGenerator.class)
 public class CategoryMedia extends Media
 {
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ENTITY_ID", referencedColumnName = "ID")
     Category category;
 }
