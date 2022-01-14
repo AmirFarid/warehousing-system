@@ -10,7 +10,6 @@ import javax.persistence.*;
 @Data
 @Entity
 @Builder
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @DiscriminatorValue("category")

@@ -17,6 +17,7 @@ import java.util.Date;
 public class Address
 {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
     String alias;
     String addressLine;

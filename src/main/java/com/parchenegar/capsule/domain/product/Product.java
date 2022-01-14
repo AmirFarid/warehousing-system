@@ -18,10 +18,12 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "PRODUCTS")
+@JsonIgnoreProperties(value = {"type", "media", "categories", "attributes"})
 @JsonIdentityInfo(property = "id", generator = ObjectIdGenerators.PropertyGenerator.class)
 public class Product
 {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
     String name;
     String description;
@@ -33,9 +35,10 @@ public class Product
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PRODUCT_TYPE_ID")
+    @ToString.Exclude
     ProductType type;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
     @ToString.Exclude
     List<ProductMedia> media;
 
@@ -57,7 +60,7 @@ public class Product
     @ToString.Exclude
     List<Attribute> attributes;
 
-    public boolean isActive()
+    public boolean active()
     {
         if ("true".equals(isActive)) {
             return true;

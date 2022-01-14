@@ -14,6 +14,7 @@ import java.util.Date;
 public class Phone
 {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
     String number;
     Date created;

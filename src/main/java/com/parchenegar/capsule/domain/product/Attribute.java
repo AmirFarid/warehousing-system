@@ -3,9 +3,7 @@ package com.parchenegar.capsule.domain.product;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @Entity
@@ -17,6 +15,7 @@ import javax.persistence.Table;
 public class Attribute
 {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
     String key;
     String value;

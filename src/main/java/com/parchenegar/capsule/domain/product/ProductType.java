@@ -9,13 +9,13 @@ import java.util.Date;
 @Data
 @Entity
 @Builder
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "PRODUCT_TYPES")
 public class ProductType
 {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
     String name;
     String description;

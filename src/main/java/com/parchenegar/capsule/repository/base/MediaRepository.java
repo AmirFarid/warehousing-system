@@ -1,10 +1,10 @@
 package com.parchenegar.capsule.repository.base;
 
-import com.parchenegar.capsule.domain.base.Region;
+import com.parchenegar.capsule.domain.base.media.Media;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface RegionRepository extends JpaRepository<Region, Long>
+public interface MediaRepository extends JpaRepository<Media, Long>
 {
 }

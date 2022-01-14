@@ -15,6 +15,7 @@ import java.util.List;
 public class Region
 {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
     String name;
     String slug;

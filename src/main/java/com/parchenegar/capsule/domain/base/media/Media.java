@@ -7,7 +7,6 @@ import java.util.Date;
 
 @Data
 @Entity
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "MEDIA")
@@ -16,6 +15,7 @@ import java.util.Date;
 public abstract class Media
 {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
     String name;
     String fileName;
