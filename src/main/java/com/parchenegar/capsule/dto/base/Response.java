@@ -1,5 +1,6 @@
 package com.parchenegar.capsule.dto.base;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 @AllArgsConstructor
 public class Response
 {
+    @JsonProperty("records")
     Object body;
     String description;
     String message;
