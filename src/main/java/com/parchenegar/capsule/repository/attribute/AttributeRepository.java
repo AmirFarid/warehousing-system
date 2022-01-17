@@ -1,7 +1,7 @@
-package com.parchenegar.capsule.repository.product;
+package com.parchenegar.capsule.repository.attribute;
 
 
-import com.parchenegar.capsule.domain.product.Attribute;
+import com.parchenegar.capsule.domain.attribute.Attribute;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

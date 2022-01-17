@@ -1,10 +1,13 @@
 package com.parchenegar.capsule.domain.product;
 
 
+import com.parchenegar.capsule.domain.attribute.Attribute;
+import com.parchenegar.capsule.domain.attribute.AttributeValue;
 import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -21,4 +24,13 @@ public class ProductType
     String description;
     Date created;
     Date modified;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "ATTRIBUTE_VALUE_PRODUCT_TYPE",
+            joinColumns = @JoinColumn(name = "PRODUCT_TYPE_ID"),
+            inverseJoinColumns = @JoinColumn(name = "ATTRIBUTE_VALUE_ID")
+    )
+    @ToString.Exclude
+    List<AttributeValue> attributeValues;
 }

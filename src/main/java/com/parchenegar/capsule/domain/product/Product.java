@@ -26,10 +26,12 @@ public class Product
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
     String name;
-    String description;
-    String isActive;
-    String unitsOnOrder;
     String color;
+    String isActive;
+    String description;
+    String unitsOnOrder;
+    String qtyUnit;
+    int qty;
     Date created;
     Date modified;
 
@@ -51,14 +53,12 @@ public class Product
     @ToString.Exclude
     List<Category> categories;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "ATTRIBUTE_PRODUCT",
-            joinColumns = @JoinColumn(name = "PRODUCT_ID"),
-            inverseJoinColumns = @JoinColumn(name = "ATTRIBUTE_ID")
-    )
-    @ToString.Exclude
-    List<Attribute> attributes;
+
+    public Product addCategory(Category category)
+    {
+        this.categories.add(category);
+        return this;
+    }
 
     public boolean active()
     {
