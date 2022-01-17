@@ -70,4 +70,20 @@ public class Response
         this.success = false;
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(this);
     }
+
+    public static ResponseEntity ok(Object body, String message)
+    {
+        return Response.builder().message(message).body(body).build().ok();
+    }
+
+    public static ResponseEntity ok(Object body, String message, String description)
+    {
+        return Response.builder().message(message).description(description).body(body).build().ok();
+    }
+
+    public static ResponseEntity notFound(Object body, String message)
+    {
+        return Response.builder().message(message).body(body).build().notFound();
+    }
+
 }
