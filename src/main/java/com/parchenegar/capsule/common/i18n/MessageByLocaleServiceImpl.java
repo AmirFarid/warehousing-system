@@ -21,4 +21,10 @@ public class MessageByLocaleServiceImpl implements Translator
         Locale locale = LocaleContextHolder.getLocale();
         return messageSource.getMessage(id, null, locale);
     }
+
+    @Override
+    public String get(String id)
+    {
+        return translate(id);
+    }
 }
