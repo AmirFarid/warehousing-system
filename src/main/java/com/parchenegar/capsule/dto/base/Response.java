@@ -86,4 +86,9 @@ public class Response
         return Response.builder().message(message).body(body).build().notFound();
     }
 
+    public static ResponseEntity serverError(String message)
+    {
+        return Response.builder().message(message).build().serverError();
+    }
+
 }
