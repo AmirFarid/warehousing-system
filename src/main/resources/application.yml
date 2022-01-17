@@ -16,6 +16,10 @@ spring:
     banner-mode: off
   profiles:
     active: dev
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+    serialization:
+      fail-on-empty-beans: false
 
   datasource:
     url: jdbc:postgresql://localhost:5432/parchenegar
@@ -28,12 +32,13 @@ spring:
         ddl-auto: validate
         dialect: org.hibernate.dialect.PostgreSQLDialect
         default_schema: capsule
-    show-sql: false
+        format_sql: true
+    show-sql: true
     database: postgresql
-    generate-ddl: true
+    generate-ddl: false
 
 
 
 logging:
-  pattern:
-    level: INFO
+  level:
+    root: INFO
