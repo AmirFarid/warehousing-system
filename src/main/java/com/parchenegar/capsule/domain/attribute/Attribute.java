@@ -24,10 +24,10 @@ public class Attribute
     String description;
 
     @ToString.Exclude
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "attribute")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "attribute", cascade = CascadeType.ALL)
     List<AttributeCollection> attributeCollections;
 
     @ToString.Exclude
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "attribute")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "attribute", cascade = CascadeType.ALL)
     List<AttributeValue> attributeValues;
 }
