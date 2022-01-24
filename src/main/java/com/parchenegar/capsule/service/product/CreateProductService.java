@@ -12,7 +12,6 @@ import com.parchenegar.capsule.repository.base.MediaRepository;
 import com.parchenegar.capsule.repository.product.ProductRepository;
 import com.parchenegar.capsule.repository.product.ProductTypeRepository;
 import com.parchenegar.capsule.service.base.CategoryService;
-import com.parchenegar.capsule.service.media.impl.ProductMediaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +24,6 @@ import java.util.Optional;
 @Service
 public class CreateProductService
 {
-    private ProductMediaService mediaService;
     private EntityManager entityManager;
     private StorageService storageService;
     private ProductRepository productRepository;
@@ -37,7 +35,6 @@ public class CreateProductService
     public CreateProductService(ProductRepository productRepository,
                                 StorageService storageService,
                                 ProductTypeRepository productTypeRepository,
-                                ProductMediaService mediaService,
                                 EntityManager entityManager,
                                 MediaRepository mediaRepository,
                                 CategoryService categoryService)
@@ -45,14 +42,13 @@ public class CreateProductService
         this.productRepository = productRepository;
         this.storageService = storageService;
         this.productTypeRepository = productTypeRepository;
-        this.mediaService = mediaService;
         this.entityManager = entityManager;
         this.mediaRepository = mediaRepository;
         this.categoryService = categoryService;
     }
 
 
-    public Product create(CreateProductDto productDto, Class clazz) throws Exception
+    public Product create(CreateProductDto productDto) throws Exception
     {
         Optional<ProductType> productType = productTypeRepository.findById(productDto.getProductTypeId());
         errorIfProductTypeNotFound(productType, productDto.getProductTypeId());
