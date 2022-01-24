@@ -104,6 +104,10 @@ CREATE TABLE capsule.PRODUCTS
     COLOR           VARCHAR(255) NOT NULL,
     QTY             INTEGER      NOT NULL,
     QTY_UNIT        VARCHAR(255) NOT NULL,
+    PRICE           VARCHAR(255) NOT NULL,
+    PROMOTION_PRICE VARCHAR(255)          DEFAULT NULL,
+    PRICE_LEVEL_ONE VARCHAR(255)          DEFAULT NULL,
+    PRICE_LEVEL_TWO VARCHAR(255)          DEFAULT NULL,
     PRODUCT_TYPE_ID INTEGER,
     FOREIGN KEY (PRODUCT_TYPE_ID) REFERENCES capsule.PRODUCT_TYPES (ID) ON DELETE NO ACTION,
     CREATED         TIMESTAMPTZ  NOT NULL,
@@ -136,9 +140,7 @@ CREATE TABLE capsule.CATEGORY_PRODUCT
     CATEGORY_ID INTEGER,
     FOREIGN KEY (CATEGORY_ID) REFERENCES capsule.CATEGORIES (ID) ON DELETE RESTRICT,
     PRODUCT_ID  INTEGER,
-    FOREIGN KEY (PRODUCT_ID) REFERENCES capsule.PRODUCTS (ID) ON DELETE RESTRICT,
-    CREATED     TIMESTAMPTZ NOT NULL,
-    MODIFIED    TIMESTAMPTZ NOT NULL
+    FOREIGN KEY (PRODUCT_ID) REFERENCES capsule.PRODUCTS (ID) ON DELETE RESTRICT
 );
 CREATE INDEX CATEGORY_PRODUCT_PRODUCT_ID_INDEX ON capsule.CATEGORY_PRODUCT (PRODUCT_ID);
 CREATE INDEX CATEGORY_PRODUCT_CATEGORY_ID_INDEX ON capsule.CATEGORY_PRODUCT (CATEGORY_ID);
@@ -148,12 +150,11 @@ CREATE INDEX CATEGORY_PRODUCT_CATEGORY_ID_INDEX ON capsule.CATEGORY_PRODUCT (CAT
 CREATE TABLE capsule.MEDIA
 (
     ID        SERIAL       NOT NULL PRIMARY KEY,
-    NAME      VARCHAR(255) NOT NULL,
     FILE_NAME VARCHAR(255) NOT NULL,
     MIME_TYPE VARCHAR(255) NOT NULL,
     SIZE      VARCHAR(255) NOT NULL,
     DISK      VARCHAR(255) NOT NULL,
-    PATH      VARCHAR(255) NOT NULL,
+    PATH      VARCHAR(255) DEFAULT NULL,
     ENTITY    VARCHAR(255) NOT NULL,
     ENTITY_ID INTEGER      NOT NULL,
     CREATED   TIMESTAMPTZ  NOT NULL,
@@ -173,20 +174,20 @@ CREATE TABLE capsule.ATTRIBUTES
 
 CREATE TABLE capsule.ATTRIBUTE_COLLECTIONS
 (
-    ID          SERIAL       NOT NULL PRIMARY KEY,
-    NAME        VARCHAR(255) NOT NULL,
-    DESCRIPTION VARCHAR(255) DEFAULT NULL,
-    ATTRIBUTE_ID   INTEGER      DEFAULT NULL,
+    ID           SERIAL       NOT NULL PRIMARY KEY,
+    NAME         VARCHAR(255) NOT NULL,
+    DESCRIPTION  VARCHAR(255) DEFAULT NULL,
+    ATTRIBUTE_ID INTEGER      DEFAULT NULL,
     FOREIGN KEY (ATTRIBUTE_ID) REFERENCES capsule.ATTRIBUTE_COLLECTIONS (ID) ON DELETE NO ACTION
 );
 CREATE INDEX ATTRIBUTE_COLLECTIONS_ATTRIBUTE_ID_INDEX ON capsule.ATTRIBUTE_COLLECTIONS (ATTRIBUTE_ID);
 
 CREATE TABLE capsule.ATTRIBUTE_VALUES
 (
-    ID          SERIAL       NOT NULL PRIMARY KEY,
+    ID           SERIAL       NOT NULL PRIMARY KEY,
     VALUE        VARCHAR(255) NOT NULL,
-    DESCRIPTION VARCHAR(255) DEFAULT NULL,
-    ATTRIBUTE_ID   INTEGER      DEFAULT NULL,
+    DESCRIPTION  VARCHAR(255) DEFAULT NULL,
+    ATTRIBUTE_ID INTEGER      DEFAULT NULL,
     FOREIGN KEY (ATTRIBUTE_ID) REFERENCES capsule.ATTRIBUTES (ID) ON DELETE NO ACTION
 );
 CREATE INDEX ATTRIBUTE_VALUES_ATTRIBUTE_ID_INDEX ON capsule.ATTRIBUTE_VALUES (ATTRIBUTE_ID);
@@ -194,10 +195,10 @@ CREATE INDEX ATTRIBUTE_VALUES_ATTRIBUTE_ID_INDEX ON capsule.ATTRIBUTE_VALUES (AT
 -- -----------------------------------------------------------------------------------
 CREATE TABLE capsule.ATTRIBUTE_VALUE_PRODUCT_TYPE
 (
-    ID              SERIAL       NOT NULL PRIMARY KEY,
-    ATTRIBUTE_VALUE_ID    INTEGER      NOT NULL,
+    ID                 SERIAL  NOT NULL PRIMARY KEY,
+    ATTRIBUTE_VALUE_ID INTEGER NOT NULL,
     FOREIGN KEY (ATTRIBUTE_VALUE_ID) REFERENCES capsule.ATTRIBUTE_VALUES (ID) ON DELETE NO ACTION,
-    PRODUCT_TYPE_ID INTEGER      NOT NULL,
+    PRODUCT_TYPE_ID    INTEGER NOT NULL,
     FOREIGN KEY (PRODUCT_TYPE_ID) REFERENCES capsule.PRODUCT_TYPES (ID) ON DELETE NO ACTION
 );
 
@@ -210,7 +211,7 @@ CREATE INDEX ATTRIBUTE_PRODUCT_ATTRIBUTE_ID_INDEX ON capsule.ATTRIBUTE_VALUE_PRO
 -- USER DATA
 
 INSERT INTO capsule.ATTRIBUTES (id, name, description)
-VALUES (1, 'material', 'جنس پارچه' );
+VALUES (1, 'material', 'جنس پارچه');
 INSERT INTO capsule.ATTRIBUTES (id, NAME, description)
 VALUES (2, 'resistance', 'ایستادگی');
 INSERT INTO capsule.ATTRIBUTES (id, NAME, description)
@@ -347,17 +348,100 @@ VALUES (4, 'تابستونه');
 
 
 insert into capsule.USERS(FIRST_NAME, LAST_NAME, USERNAME, PASSWORD, CREATED, MODIFIED)
-values ('nima', 'ebrazi', '09012345678', '123', now(), now());
+values ('nima', 'ebrazi', '09015262679', '123', now(), now());
 
 -- -----------------------------------------------------------------------------------
+
+
+INSERT INTO capsule.product_types (id, name, description, created, modified)
+VALUES (1, 'کرپ', 'کرپ', '2020-07-14 18:47:37.618000', '2020-07-14 18:47:37.618000');
+INSERT INTO capsule.product_types (id, name, description, created, modified)
+VALUES (2, 'ژاکارد', 'ژاکارد', '2020-07-14 18:47:38.654000', '2020-07-14 18:47:38.654000');
+INSERT INTO capsule.product_types (id, name, description, created, modified)
+VALUES (3, 'شانتون', 'شانتون', '2020-07-14 18:47:38.657000', '2020-07-14 18:47:38.657000');
+INSERT INTO capsule.product_types (id, name, description, created, modified)
+VALUES (4, 'کرپ حریر شاین', 'کرپ حریر شاین', '2020-07-14 18:47:38.661000', '2020-07-14 18:47:38.661000');
+INSERT INTO capsule.product_types (id, name, description, created, modified)
+VALUES (5, 'شانتون کنفی بافت', 'شانتون کنفی بافت', '2020-07-14 18:47:38.665000', '2020-07-14 18:47:38.665000');
+INSERT INTO capsule.product_types (id, name, description, created, modified)
+VALUES (6, 'شانتون کنفی بافت', 'شانتون کنفی بافت', '2020-07-14 18:47:38.669000', '2020-07-14 18:47:38.669000');
+INSERT INTO capsule.product_types (id, name, description, created, modified)
+VALUES (7, 'تور', 'تور', '2020-07-14 18:47:38.672000', '2020-07-14 18:47:38.672000');
+INSERT INTO capsule.product_types (id, name, description, created, modified)
+VALUES (8, 'کرپ حریر طرحدار', 'کرپ حریر طرحدار', '2020-07-14 18:47:38.675000', '2020-07-14 18:47:38.675000');
+INSERT INTO capsule.product_types (id, name, description, created, modified)
+VALUES (9, 'ژاکارد ارگانزا', 'ژاکارد ارگانزا', '2020-07-14 18:47:38.678000', '2020-07-14 18:47:38.678000');
+INSERT INTO capsule.product_types (id, name, description, created, modified)
+VALUES (10, 'نخ پنبه', 'نخ پنبه', '2020-07-14 18:47:38.681000', '2020-07-14 18:47:38.681000');
+INSERT INTO capsule.product_types (id, name, description, created, modified)
+VALUES (11, 'لینن', 'لینن', '2020-07-14 18:47:38.684000', '2020-07-14 18:47:38.684000');
+INSERT INTO capsule.product_types (id, name, description, created, modified)
+VALUES (12, 'کرپ حریر', 'کرپ حریر', '2020-07-14 18:47:38.687000', '2020-07-14 18:47:38.687000');
+INSERT INTO capsule.product_types (id, name, description, created, modified)
+VALUES (13, 'پولکی', 'پولکی', '2020-07-14 18:47:38.690000', '2020-07-14 18:47:38.690000');
+INSERT INTO capsule.product_types (id, name, description, created, modified)
+VALUES (14, 'یاخما', 'یاخما', '2020-07-14 18:47:38.694000', '2020-07-14 18:47:38.694000');
+INSERT INTO capsule.product_types (id, name, description, created, modified)
+VALUES (15, 'سوزن دوزی', 'سوزن دوزی', '2020-07-14 18:47:38.697000', '2020-07-14 18:47:38.697000');
+INSERT INTO capsule.product_types (id, name, description, created, modified)
+VALUES (16, 'لینن ترک ساده', 'لینن ترک ساده', '2020-07-14 18:47:38.700000', '2020-07-14 18:47:38.700000');
+INSERT INTO capsule.product_types (id, name, description, created, modified)
+VALUES (17, 'ساتن آمریکایی', 'ساتن آمریکایی', '2020-07-14 18:47:38.704000', '2020-07-14 18:47:38.704000');
+INSERT INTO capsule.product_types (id, name, description, created, modified)
+VALUES (18, 'لینن ساده', 'لینن ساده', '2020-07-14 18:47:38.707000', '2020-07-14 18:47:38.707000');
+INSERT INTO capsule.product_types (id, name, description, created, modified)
+VALUES (19, 'دانتل', 'دانتل', '2020-07-14 18:47:38.709000', '2020-07-14 18:47:38.709000');
+INSERT INTO capsule.product_types (id, name, description, created, modified)
+VALUES (20, 'دانتل پولکی', 'دانتل پولکی', '2020-07-14 18:47:38.715000', '2020-07-14 18:47:38.715000');
+INSERT INTO capsule.product_types (id, name, description, created, modified)
+VALUES (21, 'کتان', 'کتان', '2020-07-14 18:47:38.718000', '2020-07-14 18:47:38.718000');
+INSERT INTO capsule.product_types (id, name, description, created, modified)
+VALUES (22, 'حریر ساده', 'حریر ساده', '2020-07-14 18:47:38.721000', '2020-07-14 18:47:38.721000');
+INSERT INTO capsule.product_types (id, name, description, created, modified)
+VALUES (23, 'ژرژت نخ', 'ژرژت نخ', '2020-07-14 18:47:38.725000', '2020-07-14 18:47:38.725000');
+INSERT INTO capsule.product_types (id, name, description, created, modified)
+VALUES (24, 'گیپور', 'گیپور', '2020-07-14 18:47:38.730000', '2020-07-14 18:47:38.730000');
+INSERT INTO capsule.product_types (id, name, description, created, modified)
+VALUES (25, 'کرپ جودون', 'کرپ جودون', '2020-07-14 18:47:38.734000', '2020-07-14 18:47:38.734000');
+INSERT INTO capsule.product_types (id, name, description, created, modified)
+VALUES (26, 'فوتر', 'فوتر', '2020-07-14 18:47:38.738000', '2020-07-14 18:47:38.738000');
+INSERT INTO capsule.product_types (id, name, description, created, modified)
+VALUES (27, 'حریر', 'حریر', '2020-07-14 18:47:38.741000', '2020-07-14 18:47:38.741000');
+INSERT INTO capsule.product_types (id, name, description, created, modified)
+VALUES (28, 'ساتن', 'ساتن', '2020-07-14 18:47:38.744000', '2020-07-14 18:47:38.744000');
+INSERT INTO capsule.product_types (id, name, description, created, modified)
+VALUES (29, 'کرپ نخ', 'کرپ نخ', '2020-07-14 18:47:38.749000', '2020-07-14 18:47:38.749000');
+INSERT INTO capsule.product_types (id, name, description, created, modified)
+VALUES (30, 'وال', 'وال', '2020-07-14 18:47:38.753000', '2020-07-14 18:47:38.753000');
+INSERT INTO capsule.product_types (id, name, description, created, modified)
+VALUES (31, 'پلیسه کرپ حریر', 'پلیسه کرپ حریر', '2020-07-14 18:47:38.756000', '2020-07-14 18:47:38.756000');
+INSERT INTO capsule.product_types (id, name, description, created, modified)
+VALUES (32, 'ارگانزا ساده', 'ارگانزا ساده', '2020-07-14 18:47:38.761000', '2020-07-14 18:47:38.761000');
+INSERT INTO capsule.product_types (id, name, description, created, modified)
+VALUES (33, 'کتان', 'کتان', '2020-07-14 18:47:38.765000', '2020-07-14 18:47:38.765000');
+INSERT INTO capsule.product_types (id, name, description, created, modified)
+VALUES (34, 'مخمل ونوس', 'مخمل ونوس', '2020-07-14 18:47:38.768000', '2020-07-14 18:47:38.768000');
+INSERT INTO capsule.product_types (id, name, description, created, modified)
+VALUES (35, 'jean', 'jean', '2020-07-14 18:47:38.772000', '2020-07-14 18:47:38.772000');
+INSERT INTO capsule.product_types (id, name, description, created, modified)
+VALUES (36, 'ساتن استات', 'ساتن استات', '2020-07-14 18:47:38.775000', '2020-07-14 18:47:38.775000');
+INSERT INTO capsule.product_types (id, name, description, created, modified)
+VALUES (37, 'تافته', 'تافته', '2020-07-14 18:47:38.778000', '2020-07-14 18:47:38.778000');
+INSERT INTO capsule.product_types (id, name, description, created, modified)
+VALUES (38, 'سیلک', 'سیلک', '2020-07-14 18:47:38.781000', '2020-07-14 18:47:38.781000');
+INSERT INTO capsule.product_types (id, name, description, created, modified)
+VALUES (39, 'نخی', 'نخی', '2020-07-14 18:47:38.784000', '2020-07-14 18:47:38.784000');
+INSERT INTO capsule.product_types (id, name, description, created, modified)
+VALUES (40, 'کرپ استات', 'کرپ استات', '2020-07-14 18:47:38.787000', '2020-07-14 18:47:38.787000');
+INSERT INTO capsule.product_types (id, name, description, created, modified)
+VALUES (41, 'jean', 'jean', '2020-07-14 18:47:38.789000', '2020-07-14 18:47:38.789000');
+INSERT INTO capsule.product_types (id, name, description, created, modified)
+VALUES (42, 'کشمیر', 'کشمیر', '2020-07-14 18:47:38.792000', '2020-07-14 18:47:38.792000');
 
 
 
 insert into capsule.categories(name, slug, description, is_active, parent_id, created, modified)
 values ('category-1', 'category-1', 'description-1', 'true', null, now(), now());
-
-insert into capsule.media(name, file_name, mime_type, size, disk, path, entity, entity_id, created, modified)
-values ('name-1', 'file-name-1', 'img', '9706', 's3', 'folan-path', 'category', 1, now(), now());
 
 
 DROP TABLE capsule.PHONES CASCADE;
@@ -828,3 +912,6 @@ VALUES (1, 'ایران', 'ایران', 0x00000000010100000092cb0381e3474040c7bc0
        (379, 'مهریز', 'مهریز', 0x000000000101000000581f0f7d77973f4097e13fdd40374b40, 3, 32),
        (380, 'میبد', 'میبد', 0x00000000010100000057636424d61f4040f8020efc03014b40, 3, 32),
        (381, 'یزد', 'یزد', 0x000000000101000000219b9abae10c4040673c5b5194374b40, 3, 32);
+
+
+truncate capsule.product_types restart identity cascade

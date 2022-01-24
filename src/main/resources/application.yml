@@ -1,11 +1,17 @@
 debug: false
 
+
 server:
   port: 9000
   servlet:
     context-path: /api
 
 spring:
+  servlet:
+    multipart:
+      max-file-size: 1000MB
+      max-request-size: 1000MB
+
   messages:
     fallback-to-system-locale: false
     basename: messages,config.i18n.messages
@@ -37,8 +43,9 @@ spring:
     database: postgresql
     generate-ddl: false
 
-
-
 logging:
   level:
     root: INFO
+
+storage:
+  location: /home/nima/uploads
