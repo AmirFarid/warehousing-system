@@ -16,7 +16,8 @@ import javax.persistence.*;
 @JsonIdentityInfo(property = "id", generator = ObjectIdGenerators.PropertyGenerator.class)
 public class ProductMedia extends Media
 {
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "ENTITY_ID", referencedColumnName = "ID")
+    @PrimaryKeyJoinColumn(name = "ENTITY_ID", referencedColumnName = "ID")
     Product product;
 }

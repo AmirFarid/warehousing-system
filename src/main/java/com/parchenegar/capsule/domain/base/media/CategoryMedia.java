@@ -18,5 +18,6 @@ public class CategoryMedia extends Media
 {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ENTITY_ID", referencedColumnName = "ID")
+    @PrimaryKeyJoinColumn(name = "ENTITY_ID", referencedColumnName = "ID")
     Category category;
 }

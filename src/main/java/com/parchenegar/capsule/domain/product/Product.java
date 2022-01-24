@@ -7,6 +7,8 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.parchenegar.capsule.domain.base.Category;
 import com.parchenegar.capsule.domain.base.media.ProductMedia;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -31,8 +33,18 @@ public class Product
     String description;
     String unitsOnOrder;
     String qtyUnit;
-    int qty;
+    String price;
+    String promotionPrice;
+    String priceLevelOne;
+    String priceLevelTwo;
+    long qty;
+
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
     Date created;
+
+    @UpdateTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
     Date modified;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -60,23 +72,40 @@ public class Product
         return this;
     }
 
-    public boolean active()
+    public Product addMedia(ProductMedia media)
     {
-        if ("true".equals(isActive)) {
-            return true;
+        this.media.add(media);
+        return this;
+    }
+
+    public boolean getIsActive()
+    {
+        return "true".equals(isActive) ? true : false;
+    }
+
+    public boolean isActive()
+    {
+        return "true".equals(isActive) ? true : false;
+    }
+
+    public void setIsActive(boolean isActive)
+    {
+        if (isActive) {
+            this.isActive = "true";
+        } else {
+            this.isActive = "false";
         }
-        return false;
     }
 
     public Product changeToActive()
     {
-        this.isActive = "true";
+        setIsActive(true);
         return this;
     }
 
     public Product changeToDeActive()
     {
-        this.isActive = "false";
+        setIsActive(false);
         return this;
     }
 }

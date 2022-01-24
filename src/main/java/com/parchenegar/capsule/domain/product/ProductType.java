@@ -4,6 +4,8 @@ package com.parchenegar.capsule.domain.product;
 import com.parchenegar.capsule.domain.attribute.Attribute;
 import com.parchenegar.capsule.domain.attribute.AttributeValue;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -22,7 +24,13 @@ public class ProductType
     long id;
     String name;
     String description;
+
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
     Date created;
+
+    @UpdateTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
     Date modified;
 
     @ManyToMany(fetch = FetchType.LAZY)
