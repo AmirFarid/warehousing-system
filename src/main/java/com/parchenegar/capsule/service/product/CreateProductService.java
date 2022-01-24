@@ -1,7 +1,6 @@
 package com.parchenegar.capsule.service.product;
 
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.parchenegar.capsule.common.storage.StorageService;
 import com.parchenegar.capsule.domain.base.Category;
 import com.parchenegar.capsule.domain.base.media.ProductMedia;
