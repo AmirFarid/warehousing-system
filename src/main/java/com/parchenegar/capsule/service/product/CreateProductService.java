@@ -66,6 +66,8 @@ public class CreateProductService
                 .unitsOnOrder("CENTIMETER")
                 .build();
 
+        // todo: add branch_id from auth user with SecurityUtils.
+
         if (productDto.getIsActive()) {
             product.changeToActive();
         } else {
