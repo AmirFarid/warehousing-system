@@ -24,6 +24,7 @@ public class Invoice
     @Id
     long id;
     String status;
+    String type;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ORDER_ID")
