@@ -16,6 +16,7 @@ import javax.persistence.*;
 public class AttributeCollection
 {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
     String name;
     String description;

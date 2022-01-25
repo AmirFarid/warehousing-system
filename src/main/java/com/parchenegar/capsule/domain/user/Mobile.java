@@ -15,6 +15,7 @@ import java.util.Date;
 public class Mobile
 {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
     String number;
     Date created;

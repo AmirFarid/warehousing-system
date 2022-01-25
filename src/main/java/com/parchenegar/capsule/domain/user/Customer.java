@@ -19,6 +19,7 @@ import java.util.Date;
 public class Customer
 {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
     String mobile;
 

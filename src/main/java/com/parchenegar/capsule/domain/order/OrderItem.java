@@ -20,6 +20,7 @@ import java.util.Date;
 public class OrderItem
 {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
     String priceAmount;
     String discount;
