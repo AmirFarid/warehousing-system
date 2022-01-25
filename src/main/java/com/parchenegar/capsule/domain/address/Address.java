@@ -1,9 +1,7 @@
-package com.parchenegar.capsule.domain.base;
+package com.parchenegar.capsule.domain.address;
 
 
-import com.parchenegar.capsule.domain.user.User;
 import lombok.*;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -14,6 +12,8 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "ADDRESSES")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "ENTITY", discriminatorType = DiscriminatorType.STRING)
 public class Address
 {
     @Id
@@ -28,9 +28,4 @@ public class Address
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "REGION_ID")
     Region region;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "USER_ID")
-    User user;
-
 }

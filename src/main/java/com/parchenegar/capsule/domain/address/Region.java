@@ -1,4 +1,4 @@
-package com.parchenegar.capsule.domain.base;
+package com.parchenegar.capsule.domain.address;
 
 
 import lombok.*;
@@ -20,6 +20,7 @@ public class Region
     String name;
     String slug;
     String coordinate;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PARENT_ID")

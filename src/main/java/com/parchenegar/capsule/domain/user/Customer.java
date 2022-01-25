@@ -1,8 +1,9 @@
 package com.parchenegar.capsule.domain.user;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.parchenegar.capsule.domain.base.Branch;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -14,20 +15,12 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "USERS")
-public class User
+@Table(name = "CUSTOMERS")
+public class Customer
 {
     @Id
     long id;
-    String firstName;
-    String lastName;
-    String username;
-    @JsonIgnore
-    String password;
-
-    @ManyToOne
-    @JoinColumn(name = "BRANCH_ID")
-    Branch branch;
+    String mobile;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
@@ -36,6 +29,5 @@ public class User
     @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     Date modified;
-
 
 }

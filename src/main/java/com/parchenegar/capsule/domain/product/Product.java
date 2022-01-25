@@ -4,8 +4,9 @@ package com.parchenegar.capsule.domain.product;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.parchenegar.capsule.domain.base.Branch;
 import com.parchenegar.capsule.domain.base.Category;
-import com.parchenegar.capsule.domain.base.media.ProductMedia;
+import com.parchenegar.capsule.domain.media.ProductMedia;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -51,6 +52,11 @@ public class Product
     @JoinColumn(name = "PRODUCT_TYPE_ID")
     @ToString.Exclude
     ProductType type;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "BRANCH_ID")
+    @ToString.Exclude
+    Branch branch;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
     @ToString.Exclude

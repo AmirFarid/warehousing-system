@@ -3,7 +3,7 @@ package com.parchenegar.capsule.service.product;
 
 import com.parchenegar.capsule.common.storage.StorageService;
 import com.parchenegar.capsule.domain.base.Category;
-import com.parchenegar.capsule.domain.base.media.ProductMedia;
+import com.parchenegar.capsule.domain.media.ProductMedia;
 import com.parchenegar.capsule.domain.product.Product;
 import com.parchenegar.capsule.domain.product.ProductType;
 import com.parchenegar.capsule.dto.request.product.CreateProductDto;
@@ -67,6 +67,7 @@ public class CreateProductService
                 .build();
 
         // todo: add branch_id from auth user with SecurityUtils.
+        // todo: generate barcode -> 10000000 + product_id
 
         if (productDto.getIsActive()) {
             product.changeToActive();

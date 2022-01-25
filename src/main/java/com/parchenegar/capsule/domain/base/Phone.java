@@ -1,5 +1,6 @@
 package com.parchenegar.capsule.domain.base;
 
+import com.parchenegar.capsule.domain.address.Address;
 import lombok.*;
 
 import javax.persistence.*;

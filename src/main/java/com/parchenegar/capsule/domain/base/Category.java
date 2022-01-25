@@ -3,7 +3,7 @@ package com.parchenegar.capsule.domain.base;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import com.parchenegar.capsule.domain.base.media.CategoryMedia;
+import com.parchenegar.capsule.domain.media.CategoryMedia;
 import lombok.*;
 
 import javax.persistence.*;

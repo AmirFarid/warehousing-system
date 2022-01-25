@@ -1,9 +1,12 @@
-package com.parchenegar.capsule.domain.base.media;
+package com.parchenegar.capsule.domain.address;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import com.parchenegar.capsule.domain.base.Category;
-import lombok.*;
+import com.parchenegar.capsule.domain.user.User;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -12,12 +15,12 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@DiscriminatorValue("category")
+@DiscriminatorValue("user")
 @JsonIdentityInfo(property = "id", generator = ObjectIdGenerators.PropertyGenerator.class)
-public class CategoryMedia extends Media
+public class UserAddress extends Address
 {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ENTITY_ID", referencedColumnName = "ID")
     @PrimaryKeyJoinColumn(name = "ENTITY_ID", referencedColumnName = "ID")
-    Category category;
+    User user;
 }

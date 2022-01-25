@@ -1,4 +1,4 @@
-package com.parchenegar.capsule.domain.base.media;
+package com.parchenegar.capsule.domain.media;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;

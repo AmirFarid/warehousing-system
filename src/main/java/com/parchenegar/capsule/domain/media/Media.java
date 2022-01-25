@@ -1,4 +1,4 @@
-package com.parchenegar.capsule.domain.base.media;
+package com.parchenegar.capsule.domain.media;
 
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
