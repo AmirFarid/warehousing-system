@@ -1,0 +1,60 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.parchenegar.capsule.config.oauth.jwt.resource.SecurityProperties",
+      "name": "security",
+      "type": "com.parchenegar.capsule.config.oauth.jwt.resource.SecurityProperties"
+    },
+    {
+      "sourceType": "com.parchenegar.capsule.config.oauth.jwt.resource.SecurityProperties",
+      "name": "security.jwt",
+      "sourceMethod": "getJwt()",
+      "type": "com.parchenegar.capsule.config.oauth.jwt.resource.SecurityProperties$JwtProperties"
+    },
+    {
+      "sourceType": "com.parchenegar.capsule.config.oauth.jwt.server.props.SecurityProperties",
+      "name": "securityserver",
+      "type": "com.parchenegar.capsule.config.oauth.jwt.server.props.SecurityProperties"
+    },
+    {
+      "sourceType": "com.parchenegar.capsule.config.oauth.jwt.server.props.SecurityProperties",
+      "name": "securityserver.jwt",
+      "sourceMethod": "getJwt()",
+      "type": "com.parchenegar.capsule.config.oauth.jwt.server.props.SecurityProperties$JwtProperties"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "com.parchenegar.capsule.config.oauth.jwt.resource.SecurityProperties$JwtProperties",
+      "name": "security.jwt.public-key",
+      "type": "org.springframework.core.io.Resource"
+    },
+    {
+      "sourceType": "com.parchenegar.capsule.config.oauth.jwt.server.props.SecurityProperties",
+      "name": "security.jwt.key-store-password",
+      "type": "java.lang.String"
+    },
+
+    {
+      "sourceType": "com.parchenegar.capsule.config.oauth.jwt.server.props.SecurityProperties$JwtProperties",
+      "name": "securityserver.jwt.key-pair-alias",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.parchenegar.capsule.config.oauth.jwt.server.props.SecurityProperties$JwtProperties",
+      "name": "securityserver.jwt.key-pair-password",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.parchenegar.capsule.config.oauth.jwt.server.props.SecurityProperties$JwtProperties",
+      "name": "securityserver.jwt.key-store",
+      "type": "org.springframework.core.io.Resource"
+    },
+    {
+      "sourceType": "com.parchenegar.capsule.config.oauth.jwt.server.props.SecurityProperties$JwtProperties",
+      "name": "securityserver.jwt.key-store-password",
+      "type": "java.lang.String"
+    }
+  ]
+}

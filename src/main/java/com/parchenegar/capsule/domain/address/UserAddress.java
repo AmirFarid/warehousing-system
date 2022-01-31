@@ -12,7 +12,6 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @DiscriminatorValue("user")

@@ -12,8 +12,64 @@ CREATE TABLE capsule.BRANCHES
 );
 
 COMMENT ON COLUMN capsule.BRANCHES.TYPE IS 'STORE -> 1, WAREHOUSE -> 2';
--- -----------------------------------------------------------
 
+
+-- -----------------------------------------------------------
+CREATE TABLE IF NOT EXISTS capsule.oauth_client_details
+(
+    client_id               VARCHAR(256) PRIMARY KEY,
+    resource_ids            VARCHAR(256),
+    client_secret           VARCHAR(256) NOT NULL,
+    scope                   VARCHAR(256),
+    authorized_grant_types  VARCHAR(256),
+    web_server_redirect_uri VARCHAR(256),
+    authorities             VARCHAR(256),
+    access_token_validity   INTEGER,
+    refresh_token_validity  INTEGER,
+    additional_information  VARCHAR(4000),
+    autoapprove             VARCHAR(256)
+);
+
+CREATE TABLE IF NOT EXISTS capsule.oauth_client_token
+(
+    token_id          VARCHAR(256),
+    token             TEXT,
+    authentication_id VARCHAR(256) PRIMARY KEY,
+    user_name         VARCHAR(256),
+    client_id         VARCHAR(256)
+);
+
+CREATE TABLE IF NOT EXISTS capsule.oauth_access_token
+(
+    token_id          VARCHAR(256),
+    token             text,
+    authentication_id VARCHAR(256),
+    user_name         VARCHAR(256),
+    client_id         VARCHAR(256),
+    authentication    TEXT,
+    refresh_token     VARCHAR(256)
+);
+
+CREATE TABLE IF NOT EXISTS capsule.oauth_refresh_token
+(
+    token_id       VARCHAR(256),
+    token          TEXT,
+    authentication TEXT
+);
+
+CREATE TABLE IF NOT EXISTS capsule.oauth_code
+(
+    code           VARCHAR(256),
+    authentication TEXT
+);
+
+CREATE TABLE IF NOT EXISTS capsule.authorities
+(
+    username  VARCHAR(256) NOT NULL,
+    authority VARCHAR(256) NOT NULL,
+    PRIMARY KEY (username, authority)
+);
+-- -----------------------------------------------------------
 
 CREATE TABLE IF NOT EXISTS capsule.USERS
 (
@@ -22,17 +78,14 @@ CREATE TABLE IF NOT EXISTS capsule.USERS
     LAST_NAME  varchar(225) NOT NULL,
     USERNAME   varchar(225) NOT NULL UNIQUE,
     PASSWORD   varchar(225),
-    BRANCH_ID INTEGER NOT NULL,
-    FOREIGN KEY (BRANCH_ID) REFERENCES capsule.BRANCHES (ID) ON DELETE CASCADE,
+    ENABLED    INT          NOT NULL DEFAULT 1,
     CREATED    TIMESTAMPTZ,
     MODIFIED   TIMESTAMPTZ
 );
 
 CREATE INDEX USERS_USERNAME_INDEX ON capsule.USERS (USERNAME);
-CREATE INDEX USERS_BRANCH_ID_INDEX ON capsule.users (BRANCH_ID);
 
 -- -----------------------------------------------------------
-
 
 CREATE TABLE IF NOT EXISTS capsule.BRANCH_USER
 (
@@ -311,6 +364,22 @@ COMMENT ON COLUMN capsule.INVOICES.TYPE IS 'SALE, BUY';
 
 -- USER DATA
 
+-- The encrypted password is `pass`
+insert into capsule.branches(name, description, type, is_active, created, modified)
+values ('My Branch', 'My Branch', 'store', 'true', now(), now());
+
+INSERT INTO capsule.users (FIRST_NAME, LAST_NAME, USERNAME, PASSWORD)
+VALUES ('NIMA', 'EBRAZI', 'user', '{bcrypt}$2a$10$cyf5NfobcruKQ8XGjUJkEegr9ZWFqaea6vjpXWEaSqTa2xL9wjgQC');
+INSERT INTO capsule.authorities (username, authority)
+VALUES ('user', 'ROLE_USER');
+
+-- The encrypted client_secret it `secret`
+INSERT INTO capsule.oauth_client_details (client_id, client_secret, scope, authorized_grant_types, authorities,
+                                          access_token_validity)
+VALUES ('clientId', '{bcrypt}$2a$10$vCXMWCn7fDZWOcLnIEhmK.74dvK1Eh8ae2WrWlhr2ETPLoxQctN4.', 'read,write',
+        'password,refresh_token,client_credentials', 'ROLE_CLIENT', 300);
+
+
 INSERT INTO capsule.ATTRIBUTES (id, name, description)
 VALUES (1, 'material', 'جنس پارچه');
 INSERT INTO capsule.ATTRIBUTES (id, NAME, description)
@@ -565,6 +634,12 @@ drop table capsule.ATTRIBUTE_VALUE_PRODUCT_TYPE CASCADE;
 drop table capsule.BRANCHES CASCADE;
 drop table capsule.BRANCH_USER CASCADE;
 drop table capsule.CUSTOMERS CASCADE;
+drop table capsule.authorities CASCADE;
+drop table capsule.oauth_access_token CASCADE;
+drop table capsule.oauth_client_details CASCADE;
+drop table capsule.oauth_client_token CASCADE;
+drop table capsule.oauth_code CASCADE;
+drop table capsule.oauth_refresh_token CASCADE;
 
 
 
