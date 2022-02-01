@@ -8,8 +8,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
-public final class SecurityUtils {
+public final class SecurityUtils
+{
 
     /**
      * Get the login of the current user.
@@ -21,14 +24,11 @@ public final class SecurityUtils {
         SecurityContext securityContext = SecurityContextHolder.getContext();
         Authentication authentication = securityContext.getAuthentication();
         String userName = null;
-        if (authentication != null)
-        {
-            if (authentication.getPrincipal() instanceof UserDetails)
-            {
+        if (authentication != null) {
+            if (authentication.getPrincipal() instanceof UserDetails) {
                 UserDetails springSecurityUser = (UserDetails) authentication.getPrincipal();
                 userName = springSecurityUser.getUsername();
-            }
-            else if (authentication.getPrincipal() instanceof String){
+            } else if (authentication.getPrincipal() instanceof String) {
                 userName = (String) authentication.getPrincipal();
             }
         }
@@ -44,8 +44,7 @@ public final class SecurityUtils {
     {
         SecurityContext securityContext = SecurityContextHolder.getContext();
         Collection<? extends GrantedAuthority> authorities = securityContext.getAuthentication().getAuthorities();
-        if (authorities != null)
-        {
+        if (authorities != null) {
 /*
             for (GrantedAuthority authority : authorities)
             {
@@ -69,14 +68,29 @@ public final class SecurityUtils {
     {
         SecurityContext securityContext = SecurityContextHolder.getContext();
         Authentication authentication = securityContext.getAuthentication();
-        if (authentication != null)
-        {
-            if (authentication.getPrincipal() instanceof UserDetails)
-            {
+        if (authentication != null) {
+            if (authentication.getPrincipal() instanceof UserDetails) {
                 UserDetails springSecurityUser = (UserDetails) authentication.getPrincipal();
                 return springSecurityUser.getAuthorities().contains(new SimpleGrantedAuthority(authority));
             }
         }
         return false;
+    }
+
+
+    public static List<String> getCurrentUserRole()
+    {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        return authentication
+                .getAuthorities()
+                .stream()
+                .map(r -> r.getAuthority())
+                .collect(Collectors.toList());
+    }
+
+    public static Authentication auth()
+    {
+        return SecurityContextHolder.getContext().getAuthentication();
     }
 }
