@@ -8,6 +8,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -26,9 +27,15 @@ public class User
     @JsonIgnore
     String password;
 
-    @ManyToOne
-    @JoinColumn(name = "BRANCH_ID")
-    Branch branch;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "BRANCH_USER",
+            joinColumns = @JoinColumn(name = "USER_ID"),
+            inverseJoinColumns = @JoinColumn(name = "BRANCH_ID")
+    )
+    @ToString.Exclude
+
+    List<Branch> branches;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
