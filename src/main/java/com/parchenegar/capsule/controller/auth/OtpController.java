@@ -54,7 +54,7 @@ public class OtpController
             return Response.builder().message(translator.translate("otp.incorrect_code")).build().with(422);
         }
 
-        User user = userRepository.findByUsername(request.getRecipient());
+        User user = userRepository.findByUsername(request.getRecipient()).get();
 
         if (user == null) {
             return Response.builder().message(translator.translate("otp.user_not_found")).build().notFound();
